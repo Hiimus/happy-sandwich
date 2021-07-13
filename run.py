@@ -59,7 +59,7 @@ def validate_data(values):
 def update_worksheet(data, worksheet):
     """
     Receives a list of integers to be inserted into a worksheet.
-    Update the relevant worksheet with the data provided 
+    Update the relevant worksheet with the data provided
     """
     print(f"Updating {worksheet} worksheet...\n")
     worksheet_to_update = SHEET.worksheet(worksheet)
@@ -83,24 +83,23 @@ def calculate_surplus_data(sales_row):
     for stock, sales in zip(stock_row, sales_row):
         surplus = int(stock) - sales
         surplus_data.append(surplus)
-    
     return surplus_data
 
 
 def get_last_5_entry_sales():
     """
-    Collects columns of data from sales worksheet, collecting 
-    the last 5 entries for each sandwich and returns the 
+    Collects columns of data from sales worksheet, collecting
+    the last 5 entries for each sandwich and returns the
     data as a list of lists.
     """
     sales = SHEET.worksheet("sales")
-    
     columns = []
     for ind in range(1, 7):
         column = sales.col_values(ind)
         columns.append(column[-5:])
 
     return columns
+
 
 def calculate_stock_data(data):
     """
@@ -114,7 +113,6 @@ def calculate_stock_data(data):
         average = sum(int_column) / len(int_column)
         stock_num = average * 1.1
         new_stock_data.append(round(stock_num))
-    
     return new_stock_data
 
 
@@ -128,9 +126,7 @@ def main():
     sales_columns = get_last_5_entry_sales()
     stock_data = calculate_stock_data(sales_columns)
     update_worksheet(stock_data, "stock")
-    
 
 
 print("Welcome to Happy Sandwich Data Automation")
 main()
-
